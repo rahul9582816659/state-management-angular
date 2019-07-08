@@ -8,11 +8,14 @@ import { EmployeeComponent } from './employee/employee/employee.component';
 import {employeeReducer} from './employee/store/employee.reducer';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MaterialModule} from './app-material.module';
+import { AddEmployeeComponent } from './employee/employee/add-employee/add-employee.component';
+import {ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
-    EmployeeComponent
+    EmployeeComponent,
+    AddEmployeeComponent
   ],
   imports: [
     BrowserModule,
@@ -20,7 +23,7 @@ import {MaterialModule} from './app-material.module';
     StoreModule.forRoot({employee: employeeReducer}),
     BrowserAnimationsModule,
     MaterialModule,
-
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

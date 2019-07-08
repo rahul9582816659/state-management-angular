@@ -1,8 +1,13 @@
 <div class="list">
 
-  <mat-list role="list" *ngFor="let employee of employees">
-    <mat-list-item role="listitem">{{ employee. id }} : {{ employee.name }}</mat-list-item>
+  <mat-list role="list" *ngFor="let employee of (employees | async).employees; let i = index" style="cursor: pointer">
+    <mat-list-item role="listitem" (click)="selectEmployee(i)">{{ employee. id }} : {{ employee.name }}</mat-list-item>
     <mat-divider></mat-divider>
   </mat-list>
 
 </div>
+
+
+
+<h1>Add New Employee</h1>
+<app-add-employee></app-add-employee>

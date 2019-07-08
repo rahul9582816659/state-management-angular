@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Employee} from '../employee.model';
 import {Store} from '@ngrx/store';
+import {Observable} from 'rxjs';
+import {EmployeeService} from '../employee.service';
 
 @Component({
   selector: 'app-employee',
@@ -9,11 +11,16 @@ import {Store} from '@ngrx/store';
 })
 export class EmployeeComponent implements OnInit {
 
-  constructor(private store: Store) { }
+  employees: Observable<{employees: Employee[]}>;
+
+  constructor(private store: Store<{employee: {employees: Employee[]}}>, private employeeService: EmployeeService) { }
 
   ngOnInit() {
+    this.employees = this.store.select('employee');
   }
 
-  employees: Employee[] = [new Employee(1, 'Rahul'), new Employee(2, 'Shalu')];
 
+  selectEmployee(index: number) {
+    this.employeeService.startedEditing.next(index);
+  }
 }

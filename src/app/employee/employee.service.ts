@@ -3,6 +3,8 @@ import {Subject} from 'rxjs';
 import {Employee} from './employee.model';
 import {Store} from '@ngrx/store';
 import {AddEmployee} from './store/employee.action';
+import * as fromEmployee from '../store/app.reducer';
+
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +19,7 @@ export class EmployeeService {
 
   startedEditing = new Subject<number>();
 
-  constructor(private store: Store<{employee: {employees: Employee[]}}>) { }
+  constructor(private store: Store<fromEmployee.AppState>) { }
 
   findEmployee(index: number) {
     return this.employees[index];

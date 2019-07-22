@@ -3,6 +3,8 @@ import {Employee} from '../employee.model';
 import {Store} from '@ngrx/store';
 import {Observable} from 'rxjs';
 import {EmployeeService} from '../employee.service';
+import * as fromEmployee from '../store/employee.reducer';
+import {StartEditing} from '../store/employee.action';
 
 @Component({
   selector: 'app-employee',
@@ -13,7 +15,7 @@ export class EmployeeComponent implements OnInit {
 
   employees: Observable<{employees: Employee[]}>;
 
-  constructor(private store: Store<{employee: {employees: Employee[]}}>, private employeeService: EmployeeService) { }
+  constructor(private store: Store<fromEmployee.AppState>, private employeeService: EmployeeService) { }
 
   ngOnInit() {
     this.employees = this.store.select('employee');
@@ -21,6 +23,6 @@ export class EmployeeComponent implements OnInit {
 
 
   selectEmployee(index: number) {
-    this.employeeService.startedEditing.next(index);
+    this.store.dispatch(new StartEditing(index));
   }
 }
